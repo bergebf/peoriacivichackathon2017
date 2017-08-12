@@ -5,9 +5,9 @@
     <string name="drawer_close">Close</string>
     <string-array
         name="drawer_options">
-        <item>Road Work</item>
-        <item>Water</item>
-        <item>Fiber</item>
-        <item>Trees</item>
+        <item>Arterial Work</item>
+        <item>Resurfacing</item>
+        <item>Sidewalk</item>
+        <item>Residential</item>
     </string-array>
 </resources>

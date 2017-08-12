@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,9 +43,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
         mDrawerTitles = getResources().getStringArray(R.array.drawer_options);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mDrawerTitles));
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
@@ -92,13 +91,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if(position == 0) {
-                selectItem(position);
-            }
-//            selectItem(position);
-
-
-
+            selectItem(position);
         }
     }
 
@@ -126,7 +119,17 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(peoria, 11));
         try {
             layers[0] = new GeoJsonLayer(mMap, R.raw.arterialrecon, getApplicationContext());
-            layerArterial = new GeoJsonLayer(mMap, R.raw.arterialrecon, getApplicationContext());
+            layers[1] = new GeoJsonLayer(mMap, R.raw.pavement2017, getApplicationContext());
+            layers[2] = new GeoJsonLayer(mMap, R.raw.sidewalkconstruction, getApplicationContext());
+            layers[3] = new GeoJsonLayer(mMap, R.raw.residential, getApplicationContext());
+
+            layers[0].setOnFeatureClickListener(new GeoJsonLayer.OnFeatureClickListener() {
+                @Override
+                public void onFeatureClick(Feature feature) {
+                    Log.i("GeoJsonClick", "Feature clicked: " + feature.getProperty("ProjStreet"));
+                }
+            });
+
         } catch (Exception e) {
 
         }
