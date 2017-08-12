@@ -3,11 +3,21 @@
     <string name="title_activity_map">Map</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string-array
-        name="drawer_options">
+
+    <string name="project_name">Project:</string>
+    <string name="project_start">Project Start:</string>
+    <string name="project_stop">Project Stop:</string>
+    <string name="project_status">Project Status:</string>
+    <string name="project_contractor">Project Contractor:</string>
+    <string name="dialog_close">Close</string>
+
+    <string-array name="drawer_options">
         <item>Arterial Work</item>
         <item>Resurfacing</item>
         <item>Sidewalk</item>
         <item>Residential</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

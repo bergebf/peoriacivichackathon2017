@@ -1,14 +1,18 @@
 package com.pch2017.bergebf.workingasdesigned;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -17,8 +21,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.data.Feature;
+import com.google.maps.android.data.Geometry;
+import com.google.maps.android.data.MultiGeometry;
 import com.google.maps.android.data.geojson.GeoJsonFeature;
 import com.google.maps.android.data.geojson.GeoJsonLayer;
+import com.google.maps.android.data.geojson.GeoJsonMultiPolygon;
+import com.google.maps.android.data.geojson.GeoJsonPolygon;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -126,7 +137,34 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             layers[0].setOnFeatureClickListener(new GeoJsonLayer.OnFeatureClickListener() {
                 @Override
                 public void onFeatureClick(Feature feature) {
+                    TextView mtext;
+                    Button mButton;
+                    final Dialog dialog = new Dialog(MapActivity.this);
+                    dialog.setContentView(R.layout.details_dialog);
+                    dialog.setTitle("Project Details");
+                    mtext = (TextView) dialog.findViewById(R.id.textView5);
+                    mtext.setText(feature.getProperty("ProjStreet"));
+                    mtext = (TextView) dialog.findViewById(R.id.textView7);
+                    mtext.setText(feature.getProperty("EstState"));
+                    mtext = (TextView) dialog.findViewById(R.id.textView9);
+                    mtext.setText(feature.getProperty("EstEnd"));
+                    mtext = (TextView) dialog.findViewById(R.id.textView11);
+                    mtext.setText("Ongoing");
+                    mtext = (TextView) dialog.findViewById(R.id.textView13);
+                    mtext.setText("Chuck's Construction");
+
+                    mButton = (Button) dialog.findViewById(R.id.button4);
+
                     Log.i("GeoJsonClick", "Feature clicked: " + feature.getProperty("ProjStreet"));
+
+                    mButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.show();
                 }
             });
 
@@ -134,7 +172,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
         }
 
-        //layerArterial.addLayerToMap();
 
     }
 }
