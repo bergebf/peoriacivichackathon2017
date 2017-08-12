@@ -40,8 +40,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private ListView mDrawerList;
     private CharSequence mDrawerTitle;
     private ActionBarDrawerToggle mDrawerToggle;
-    private boolean[] layerToggles = new boolean[4];
-    private GeoJsonLayer[] layers = new GeoJsonLayer[4];
+    private boolean[] layerToggles = new boolean[5];
+    private GeoJsonLayer[] layers = new GeoJsonLayer[5];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 //                getActionBar().setTitle("Test");
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 
-                for(int i = 0; i < 4; i++) {
+                for(int i = 0; i < 5; i++) {
                     if(!(layers[i] == null)) {
                         if (layerToggles[i]) {
                             layers[i].addLayerToMap();
@@ -94,7 +94,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 5; i++) {
             layerToggles[i] = false;
         }
     }
@@ -133,6 +133,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             layers[1] = new GeoJsonLayer(mMap, R.raw.pavement2017, getApplicationContext());
             layers[2] = new GeoJsonLayer(mMap, R.raw.sidewalkconstruction, getApplicationContext());
             layers[3] = new GeoJsonLayer(mMap, R.raw.residential, getApplicationContext());
+            layers[4] = new GeoJsonLayer(mMap, R.raw.pendingpermits, getApplicationContext());
 
             layers[0].setOnFeatureClickListener(new GeoJsonLayer.OnFeatureClickListener() {
                 @Override
